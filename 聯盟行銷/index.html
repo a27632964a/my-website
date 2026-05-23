@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>出遊分帳小幫手</title>
+    <meta name="theme-color" content="#1f7a6d">
+    <meta name="description" content="朋友出遊花費分帳、Uber 分段下車、司機隱藏成本與付款追蹤工具。">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Trip Splitter</p>
+            <h1>出遊分帳小幫手</h1>
+          </div>
+          <button class="ghost-button" id="resetDemo" type="button">清空目前資料</button>
+        </header>
+
+        <section class="panel people-panel" aria-labelledby="peopleTitle">
+          <div class="panel-heading">
+            <div>
+              <h2 id="peopleTitle">朋友名單</h2>
+              <p>先放入這次出遊的人，後面每筆花費都能選誰要分攤。</p>
+            </div>
+          </div>
+          <form class="inline-form" id="personForm">
+            <label>
+              <span>名字</span>
+              <input id="personName" type="text" placeholder="例如：Ariel">
+            </label>
+            <button type="submit">加入</button>
+          </form>
+          <div class="chips" id="peopleList"></div>
+        </section>
+
+        <section class="panel payment-panel" aria-labelledby="paymentTitle">
+          <div class="panel-heading">
+            <div>
+              <h2 id="paymentTitle">收款資訊</h2>
+              <p>可填 LINE Pay 收款連結或銀行帳號，轉帳訊息會自動帶入。</p>
+            </div>
+          </div>
+          <div id="paymentProfileList" class="payment-profile-list"></div>
+        </section>
+
+        <section class="panel expense-panel" aria-labelledby="expenseTitle">
+          <div class="panel-heading">
+            <div>
+              <h2 id="expenseTitle">新增花費</h2>
+              <p>餐費、套票、油錢、停車、Uber、司機辛苦費都可以放進來。</p>
+            </div>
+          </div>
+
+          <form id="expenseForm" class="expense-form">
+            <div class="form-grid">
+              <label>
+                <span>項目</span>
+                <input id="expenseTitleInput" type="text" placeholder="例如：午餐、Uber A 車、司機體力成本" required>
+              </label>
+              <label>
+                <span>金額</span>
+                <input id="expenseAmount" type="number" min="0" step="1" placeholder="0" required>
+              </label>
+              <label>
+                <span>誰先付</span>
+                <select id="expensePayer"></select>
+              </label>
+              <label>
+                <span>分帳方式</span>
+                <select id="expenseMode">
+                  <option value="equal">平均分攤</option>
+                  <option value="weighted">依比例分攤</option>
+                  <option value="driver">司機/隱藏成本</option>
+                  <option value="uber">Uber 分段下車</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="mode-note" id="modeNote"></div>
+            <div class="participant-table" id="participantTable"></div>
+
+            <div class="form-actions">
+              <button class="secondary-button" type="button" id="loadSample">載入範例</button>
+              <button type="submit">加入花費</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel list-panel" aria-labelledby="expenseListTitle">
+          <div class="panel-heading">
+            <div>
+              <h2 id="expenseListTitle">花費明細</h2>
+              <p>每筆項目會即時換算成每個人的應付金額。</p>
+            </div>
+          </div>
+          <div id="expenseList" class="expense-list"></div>
+        </section>
+
+        <section class="panel history-panel" aria-labelledby="historyTitle">
+          <div class="panel-heading">
+            <div>
+              <h2 id="historyTitle">歷史紀錄</h2>
+              <p>儲存後會留在這台裝置的瀏覽器裡，之後可查詢或載回修改。</p>
+            </div>
+            <button id="saveHistory" type="button">儲存本次結算</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </section>
+      </section>
+
+      <aside class="summary-panel" aria-labelledby="summaryTitle">
+        <div class="summary-sticky">
+          <h2 id="summaryTitle">最後結算</h2>
+          <div class="total-box">
+            <span>總花費</span>
+            <strong id="totalAmount">$0</strong>
+          </div>
+          <div class="summary-section">
+            <h3>每人狀態</h3>
+            <div id="balanceList" class="balance-list"></div>
+          </div>
+          <div class="summary-section">
+            <h3>付款追蹤</h3>
+            <div id="settlementList" class="settlement-list"></div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>

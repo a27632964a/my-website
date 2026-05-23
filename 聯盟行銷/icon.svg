@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="出遊分帳小幫手">
+  <rect width="512" height="512" rx="104" fill="#1f7a6d"/>
+  <path fill="#f8fbfa" d="M132 146c0-24 20-44 44-44h160c24 0 44 20 44 44v220c0 24-20 44-44 44H176c-24 0-44-20-44-44V146z"/>
+  <path fill="#dcefe9" d="M176 102h160c24 0 44 20 44 44v30H132v-30c0-24 20-44 44-44z"/>
+  <path fill="#1f7a6d" d="M176 214h160v28H176v-28zm0 60h104v28H176v-28zm0 60h160v28H176v-28z"/>
+  <circle cx="330" cy="288" r="54" fill="#f2b84b"/>
+  <path fill="#243b3a" d="M322 318v-18h-22v-24h22v-18h24v18h22v24h-22v18h-24z"/>
+</svg>
